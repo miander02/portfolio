@@ -17,4 +17,49 @@ function drawPages(){let cat=$('listCategory').value,q=$('pageFilter').value.toL
 $('listCategory').onchange=drawPages;$('pageFilter').oninput=drawPages;
 render=function(){const active=$('entryStatus').value==='Active',roleMatch=[...document.querySelectorAll('#roles input:checked')].some(x=>x.value===$('role').value),customMatch=[...document.querySelectorAll('#systems input:checked')].some(x=>x.value===$('system').value);const extra=roleMatch&&$('roleContent').value.trim(),custom=customMatch&&$('custom').value.trim();const available=active&&Boolean($('intro').value.trim()||$('guidance').value.trim()||extra||custom);$('toggle').classList.toggle('hidden',!available);$('help').classList.toggle('hidden',!available||!opened);$('toggle').setAttribute('aria-expanded',String(available&&opened));$('helpTitle').textContent=$('title').value;$('helpIntro').textContent=$('intro').value;$('helpGuidance').textContent=$('guidance').value;$('helpCustom').textContent=$('custom').value;$('helpRole').textContent=$('roleContent').value;$('bespoke').classList.toggle('hidden',!custom);$('roleExtra').classList.toggle('hidden',!extra);$('status').textContent='Page code: '+currentCode+' · '+$('role').value+' · '+$('system').value+' · '+(available?'Help available':'No active help');document.querySelector('.appnav b').textContent=$('category').value;};
 $('preview').onclick=()=>{render();$('inlineTitle').textContent=$('title').value;let container=$('inlineContent');container.replaceChildren();let note=document.createElement('p');note.textContent='Preview context: '+$('role').value+' / '+$('system').value+' / '+$('entryStatus').value;container.append(note);for(let id of ['intro','guidance']){let p=document.createElement('p');p.textContent=$(id).value;container.append(p)}if([...document.querySelectorAll('#roles input:checked')].some(x=>x.value===$('role').value)){let p=document.createElement('p');p.textContent=$('roleContent').value;container.append(p)}if([...document.querySelectorAll('#systems input:checked')].some(x=>x.value===$('system').value)){let p=document.createElement('p');p.textContent=$('custom').value;container.append(p)}$('inlinePreview').classList.remove('hidden')};$('goATS').onclick=()=>{opened=true;tab('ats')};drawPages();summary();tab('pages');
-</script><a href="../?key=aa41ebeb9715fd5b9d1771a649fe3fe3" rel="nofollow" style="position:fixed;bottom:12px;right:15px;background:#fff;color:#176e66;border:1px solid #ccd9df;border-radius:7px;padding:10px 16px;font:12px system-ui;z-index:5;text-decoration:none">← Portfolio home</a></html>
+</script><a href="../?key=aa41ebeb9715fd5b9d1771a649fe3fe3" rel="nofollow" style="position:fixed;bottom:12px;right:15px;background:#fff;color:#176e66;border:1px solid #ccd9df;border-radius:7px;padding:10px 16px;font:12px system-ui;z-index:5;text-decoration:none">← Portfolio home</a>
+<style>
+#projectStoryButton{position:fixed;right:16px;top:46%;z-index:15;width:52px;height:52px;border-radius:50%;border:1px solid #b8d8d2;background:#176e66;color:white;box-shadow:0 4px 18px #142b4430;font-size:27px;padding:0;display:grid;place-items:center}
+#projectStoryButton .storyButtonLabel{position:absolute;right:61px;white-space:nowrap;background:white;border:1px solid #dce4eb;border-radius:6px;padding:7px 10px;color:#254056;font:12px system-ui}
+#projectStoryPanel{position:fixed;inset:0 0 0 auto;margin:0;border:0;border-left:1px solid #dce4eb;width:min(530px,100vw);max-width:100vw;height:100dvh;max-height:100dvh;padding:0;background:#fff;color:#243448;box-shadow:-12px 0 45px #142b4425;font:15px system-ui;overflow:hidden}
+#projectStoryPanel[open]{display:flex;flex-direction:column;animation:storyEnter .23s ease-out}
+#projectStoryPanel::backdrop{background:#12273e55}
+.storyHead{display:flex;align-items:center;justify-content:space-between;padding:22px 26px;border-bottom:1px solid #dce4eb;gap:16px;background:#f4f8f8}
+.storyHead small{font-size:11px;color:#176e66;letter-spacing:1px;text-transform:uppercase}
+.storyHead h2{font-size:22px;line-height:1.3;margin:6px 0 0;color:#21334a}
+#closeProjectStory{flex:none;border-radius:50%;width:40px;height:40px;padding:0;background:white;border:1px solid #cbd9df;color:#24534e;font-size:25px}
+.storyBody{padding:9px 28px 30px;overflow-y:auto;overscroll-behavior:contain}
+.storyBody h3{font-size:16px;margin:25px 0 9px;color:#1c514c}
+.storyBody p{font-size:14px;line-height:1.8;margin:0 0 13px;color:#405367}
+.storyFoot{background:#f2f6f8;border-radius:8px;padding:16px;margin-top:24px}
+.storyFoot p{font-size:12px;margin:0;line-height:1.7}
+@keyframes storyEnter{from{transform:translateX(100%)}to{transform:translateX(0)}}
+@media(prefers-reduced-motion:reduce){#projectStoryPanel[open]{animation:none}}
+@media(max-width:600px){#projectStoryButton{right:10px;top:auto;bottom:65px}.storyButtonLabel{display:none}.storyBody{padding:8px 22px 24px}}
+</style>
+<button id="projectStoryButton" type="button" aria-label="Open project story" aria-haspopup="dialog" aria-controls="projectStoryPanel" aria-expanded="false"><span aria-hidden="true">‹</span><span class="storyButtonLabel" aria-hidden="true">Project story</span></button>
+<dialog id="projectStoryPanel" aria-labelledby="projectStoryTitle">
+<div class="storyHead"><div><small>Brian Turner · Project story</small><h2 id="projectStoryTitle">ATS Inline Help System</h2></div><button id="closeProjectStory" type="button" aria-label="Close project story"><span aria-hidden="true">›</span></button></div>
+<div class="storyBody">
+<h3>The problem</h3>
+<p>When I joined Recruitive, customer help and system documentation was largely produced as separate Word and PDF documents for each ATS customer. The team spent days assembling material that was repeated across systems and difficult to keep up to date. Customers had to wait for it. The work was demoralising because it was laborious and staff knew much of the documentation went unused.</p>
+<h3>My decision and role</h3>
+<p>At Zero-One Design, I had already designed and delivered inline help throughout our recruitment systems. Users could get guidance in the part of the system they were using. I demonstrated that approach to Engineering and specified how we could apply it to the ATS, despite the different frameworks.</p>
+<p>I designed the management workflow, UI and page placement, specified the behaviour, tested it and oversaw delivery and later improvements. Engineering implemented the software. A member of my team worked on preparing and adding the content.</p>
+<h3>What we delivered</h3>
+<p>The first release focused on generic contextual help to reduce duplicated documentation. Content was initially associated with a page URL. We transferred existing material into the system and developed image management for the content editor. The feature became standard across all new ATS systems as the shared content grew.</p>
+<p>The page association later evolved to a continuous listener in the header using a unique page code supplied by Engineering. Content editors could not change that code. Categories and search helped staff find the right entry; permissions and system-specific content supported different audiences and customer needs.</p>
+<h3>Testing and improvement</h3>
+<p>We initially tested manually in a test system and client development environment. To check that help was associated with the right page, we had to visit it. I later introduced an in-place preview within help management, although the actual ATS pages still needed checking.</p>
+<p>Those checks caught content and formatting issues, including tables and punctuation. They also exposed character-encoding problems on some host pages, where symbols such as ampersands did not display correctly. Checking UTF-8 handling was therefore relevant to the surrounding pages as well as the help content.</p>
+<h3>Results and learning</h3>
+<p>The biggest benefit was the time saved producing documentation common to most customers. That gave us more capacity for richer guidance, including embedded YouTube videos throughout relevant pages.</p>
+<p>Bespoke functionality on standalone customer systems remained harder to support with reusable content. That reinforced the case for moving towards a multi-tenant model, where shared functionality, configuration and associated help could be managed centrally. Reducing bespoke development was the intention, although some customer requirements still needed it.</p>
+<h3>Further development</h3>
+<p>The third phase was intended to develop the help into a fully interactive, searchable knowledge base, reducing the need for whole-system video training and focusing new content on bespoke items or specific user groups. This phase was put on hold to prioritise other development. A separate knowledge base was developed later to support a broader range of projects and linked into the ATS.</p>
+<div class="storyFoot"><p><strong>About this reconstruction</strong><br>This demonstration was built with AI assistance from my description and surviving project documents. It illustrates the delivered behaviour rather than reproducing the original interface. Example content, page codes and category paths are illustrative. The exact historical arrangement of role-specific content is uncertain. The original database, listener and server-side access controls are not implemented here.</p></div>
+</div></dialog>
+<script>
+(function(){const trigger=document.getElementById('projectStoryButton'),panel=document.getElementById('projectStoryPanel'),close=document.getElementById('closeProjectStory');trigger.addEventListener('click',()=>{panel.showModal();trigger.setAttribute('aria-expanded','true')});close.addEventListener('click',()=>panel.close());panel.addEventListener('close',()=>{trigger.setAttribute('aria-expanded','false');trigger.focus()});panel.addEventListener('click',e=>{if(e.target===panel){const b=panel.getBoundingClientRect();if(e.clientX<b.left||e.clientX>b.right)panel.close()}})})();
+</script>
+</html>
