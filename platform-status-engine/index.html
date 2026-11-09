@@ -75,6 +75,26 @@ render=function(){oldRender();if(page==='services'){/* remove the duplicated hea
 render();
 })();
 </script>
+
+<!-- Portfolio page analytics: access keys and query strings are not recorded. -->
+<script>
+(function () {
+  if (new URLSearchParams(location.search).get('key') !== 'b79d3e6a4f2041809eb5ad736c1280fa') return;
+  window.goatcounter = {
+    path: function () { return location.pathname; },
+    referrer: function () {
+      try { var url = new URL(document.referrer); return url.origin + url.pathname; }
+      catch (e) { return ''; }
+    },
+    no_events: true
+  };
+  var script = document.createElement('script');
+  script.setAttribute('data-goatcounter', 'https://miander02.goatcounter.com/count');
+  script.async = true;
+  script.src = 'https://gc.zgo.at/count.js';
+  document.head.appendChild(script);
+})();
+</script>
 </body><style id="portfolio-information-standard">
 #drawer{width:min(530px,calc(100vw - 48px))!important;height:100dvh!important;position:fixed!important;top:0!important;right:0!important;z-index:80!important;direction:ltr!important}
 #info{position:absolute!important;right:100%!important;left:auto!important;top:40%!important;width:48px!important;height:218px!important;min-height:218px!important;padding:0!important;margin:0!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:flex-start!important;gap:0!important;border:1px solid #cbd3db!important;border-radius:7px 0 0 7px!important;background:#e5e9ed!important;color:#405367!important;box-shadow:none!important;box-sizing:border-box!important;font:15px/1.7 Arial,sans-serif!important}
