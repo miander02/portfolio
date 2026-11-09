@@ -106,4 +106,24 @@ go=function(n){if(n<0){stage=-1;render();return}originalGo(n)};
 stage=-1;render();
 })();
 </script>
+
+<!-- Portfolio page analytics: access keys and query strings are not recorded. -->
+<script>
+(function () {
+  if (new URLSearchParams(location.search).get('key') !== 'fe73a4241ed154688e7ac8bb6d287550') return;
+  window.goatcounter = {
+    path: function () { return location.pathname; },
+    referrer: function () {
+      try { var url = new URL(document.referrer); return url.origin + url.pathname; }
+      catch (e) { return ''; }
+    },
+    no_events: true
+  };
+  var script = document.createElement('script');
+  script.setAttribute('data-goatcounter', 'https://miander02.goatcounter.com/count');
+  script.async = true;
+  script.src = 'https://gc.zgo.at/count.js';
+  document.head.appendChild(script);
+})();
+</script>
 </body></html>
